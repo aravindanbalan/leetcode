@@ -7,7 +7,7 @@ You may assume that each input would have exactly one solution and you may not u
 Input: numbers={2, 7, 11, 15}, target=9
 Output: index1=1, index2=2
 
-
+```java
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int n = numbers.length;
@@ -26,3 +26,4 @@ public class Solution {
         throw new IllegalArgumentException("No two sum solution");
     }
 }
+```
