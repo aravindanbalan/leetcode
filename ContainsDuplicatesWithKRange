@@ -14,6 +14,8 @@ public class Solution {
                 int j = map.get(nums[i]);
                 if(Math.abs(i-j) <=k){
                     return true;
+                }else{
+                    map.put(nums[i], i); //update latest occurence of nums[i]
                 }
             } else{
                 map.put(nums[i], i);
