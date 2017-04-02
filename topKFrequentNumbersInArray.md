@@ -14,8 +14,8 @@ Your algorithm's time complexity must be better than O(n log n), where n is the 
 
 public class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
-        List<Integer>[] buckets = new List<Integer>[k]; //create k buckets
-        Map<Integer, Integer> frequencyMap = new HashMap<>
+        List<Integer>[] buckets = new List[nums.length + 1]; //create nums.length buckets
+        Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
         
         for(int i =0;i<nums.length;i++){
             if(frequencyMap.containsKey(nums[i])){
@@ -27,17 +27,17 @@ public class Solution {
         
         for(int key : frequencyMap.keySet()){
             int frequency = frequencyMap.get(key);
-            if(bucket[frequency] == null){
-                bucket[frequency] = new ArrayList<Integer>();
+            if(buckets[frequency] == null){
+                buckets[frequency] = new ArrayList<Integer>();
             }
             
-            bucket[frequency].add(key);
+            buckets[frequency].add(key);
         }
         
         List<Integer> res = new ArrayList<>();
-        for(int pos = bucket.length - 1 ; pos >= 0 && res.size() < k ; pos--){
-            if(bucket[pos]!=null){
-                res.addAll(bucket[pos]);
+        for(int pos = buckets.length - 1 ; pos >= 0 && res.size() < k ; pos--){
+            if(buckets[pos]!=null){
+                res.addAll(buckets[pos]);
             }
         }
         
