@@ -18,7 +18,7 @@ public class Solution {
         int min_end_here = nums[0];
         int max_end_here = nums[0];
         int min_end, max_end;
-        int max_so_far = Integer.MIN_VALUE;
+        int max_so_far = nums[0];
         
         for(int i = 1;i< n;i++){
         //keep track of local maximum and local minimum and find the appropriate max and min by multiplying nums[i]
