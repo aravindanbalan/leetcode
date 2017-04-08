@@ -26,12 +26,12 @@ public class Solution {
         List<List<Integer>> result = new ArrayList<>();
          Arrays.sort(candidates);
         int N = candidates.length;
-        helper(candidates, new ArrayList<Integer>(), N, target, target, result, 0);
+        helper(candidates, new ArrayList<Integer>(), N, target, result, 0);
         
         return result;
     }
     
-    private void helper(int[] candidates, List<Integer> tempList, int N, int newTarget, int oldTarget, List<List<Integer>> result, int start){
+    private void helper(int[] candidates, List<Integer> tempList, int N, int newTarget, List<List<Integer>> result, int start){
         if(newTarget<0){
             return;
         }
@@ -41,12 +41,11 @@ public class Solution {
         }
         
         for(int i =start;i<N;i++){
+            if(i > start && candidates[i] == candidates[i-1]) continue; //avoid duplicates
             int num = candidates[i];
-            if(num<=newTarget){
                 tempList.add(num);
-                helper(candidates, tempList, N, newTarget - num, oldTarget, result, i+1);
+                helper(candidates, tempList, N, newTarget - num, result, i+1);
                 tempList.remove(tempList.size()-1);
-            }
         }
     }
 }
