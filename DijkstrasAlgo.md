@@ -40,6 +40,7 @@ public class Djikstra {
             }
         });
 
+        src.distance = 0;
         minHeap.add(src);
 
         while(!minHeap.isEmpty()){
