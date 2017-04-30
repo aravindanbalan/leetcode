@@ -23,7 +23,7 @@ public class Solution {
             TreeNode node = stack.pop();
             result.add(node.val); //process it
             
-            if(node.right!=null){
+            if(node.right!=null){  //process right first so that its in bottom of stack and left is always processed first since its preorder
                 stack.push(node.right);
             }
             
