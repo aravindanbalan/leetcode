@@ -35,10 +35,12 @@ public class NumArray {
         if(nums.length == 0) return 0;
         
         if(i == 0 && j >=0){
-            return sums[j];a
+            return sums[j];
         }
         
-        return sums[j] - sums[i] + nums[i];
+        // return sums[j] - sums[i] + nums[i];  we can either do this or substract sums[i-1]
+        return sums[j] - sums[i-1];
+
     }
 }
 
