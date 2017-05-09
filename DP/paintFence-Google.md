@@ -20,6 +20,7 @@ public class Solution {
             //k ways to paint ith post and k-1 ways to post i-1 , if different color is chosen
             // k ways to paint i & i-1th post of same color and k-1 ways to post i-2th post, if same color is chosen
             // ways[i] = k * (k-1) * ways[i-1] + k * (k-1) * ways[i-2]; 
+            //ways[i-1] already has k in it, no need to multiply again.
             ways[i] = (k-1) * (ways[i-1] + ways[i-2]);  
         }
         
