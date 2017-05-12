@@ -28,8 +28,8 @@ public class Solution {
 }
 ```
 
-```
-Another method
+```java
+//Another method
 
 class Height{
     int height;
