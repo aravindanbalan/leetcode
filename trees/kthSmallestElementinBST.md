@@ -4,9 +4,7 @@ Note:
 You may assume k is always valid, 1 ? k ? BST's total elements.
 
 
-
 ```java
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -36,5 +34,13 @@ public class Solution {
         
         return 1 + count(root.left) + count(root.right);
     }
+    
+    
+    /**
+     * Follow up:
+        What if the BST is modified (insert/delete operations) often and you need to find the kth smallest frequently? How would you optimize the kthSmallest routine?
+        
+        In that case, store it in an array and do inorder and we get the nodes in ascending and now return the k-1 th element
+     * */
 }
 ```
