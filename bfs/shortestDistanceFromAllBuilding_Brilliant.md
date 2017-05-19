@@ -15,7 +15,6 @@ The point (1,2) is an ideal empty land to build a house, as the total travel dis
 ```
 
 ```java
-
 public class Solution {
     
     public int shortestDistance(int[][] grid) {
@@ -67,9 +66,11 @@ public class Solution {
             
             //each level contains any of the immediate surrounding 4 cells
             //do for each level because without this for loop, each of immediate nodes will be in next level
-            for(int q = 0; q < queue.size(); q++){
+            int size = queue.size();
+            for(int q = 0; q < size; q++){
                 int[] cell = queue.poll();
             
+                //check all four directions
                 for(int[] dir : dirs){
                     int row = cell[0] + dir[0];
                     int col = cell[1] + dir[1];
