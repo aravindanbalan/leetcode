@@ -1,3 +1,6 @@
+ https://www.youtube.com/watch?v=H4VrKHVG5qI
+ https://leetcode.com/problems/implement-strstr/#/description
+
 ```java
 public class Solution {
     
@@ -15,11 +18,7 @@ public class Solution {
     //         }
     //     }
     // }
-    
-   ``` 
-    https://www.youtube.com/watch?v=H4VrKHVG5qI
-    https://leetcode.com/problems/implement-strstr/#/description
-    ```
+   
     int prime = 101;
     
      public int strStr(String haystack, String needle) {
