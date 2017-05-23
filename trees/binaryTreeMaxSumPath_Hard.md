@@ -49,7 +49,17 @@ public class Solution {
 
 
 //Diameter
-int max = 0;
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    int max = 0;
     public int diameterOfBinaryTree(TreeNode root) {
         maxDepth(root);
         return max;
@@ -61,8 +71,11 @@ int max = 0;
         int left = maxDepth(root.left);
         int right = maxDepth(root.right);
         
+        //asks for number of edges in the path so (left + right)
+        //asks for number of nodes in the path so (left + right + 1)
         max = Math.max(max, left + right);
         
         return Math.max(left, right) + 1;
     }
+}
 ```
