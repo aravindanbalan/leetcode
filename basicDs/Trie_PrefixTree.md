@@ -1,3 +1,5 @@
+Implement a trie with insert, search, and startsWith methods.
+
 ```java
 public class Trie {
 
