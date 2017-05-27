@@ -19,7 +19,11 @@ public class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
         
         List<List<Integer>> result = new ArrayList<>();
-         Arrays.sort(candidates);
+        
+        // If you want to eliminate duplicates in the solution, then we sort here and then check as below to avoid duplicates
+        // f(i > start && candidates[i] == candidates[i-1]) continue; //avoid duplicates
+
+         Arrays.sort(candidates);   
         int N = candidates.length;
         helper(candidates, new ArrayList<Integer>(), N, target, result, 0);
         
