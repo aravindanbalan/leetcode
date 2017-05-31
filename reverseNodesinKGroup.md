@@ -25,48 +25,42 @@ For k = 3, you should return: 3->2->1->4->5
  */
 public class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
-        if(head == null){
-            return head;
-        }
+        if(head == null || k <=1) return head; //no need to reverse at all
         
-        if(k <= 1){
-            return head;
-        }
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
         
-            ListNode dummy = new ListNode(0);
-            dummy.next = head;
-            
-            ListNode tail = dummy, prev = dummy,temp;
-            int count;
-            while(true){
-                count =k;
-                while(count>0&&tail!=null){
-                    count--;
-                    tail=tail.next;
-                } 
-                if (tail==null) break;//Has reached the end
-                
-    
-                head=prev.next;//for next cycle
-            // prev-->temp-->...--->....--->tail-->....
-            // Delete @temp and insert to the next position of @tail
-            // prev-->...-->...-->tail-->head-->...
-            // Assign @temp to the next node of @prev
-            // prev-->temp-->...-->tail-->...-->...
-            // Keep doing until @tail is the next node of @prev
-                while(prev.next!=tail){
-                    temp=prev.next;//Assign
-                    prev.next=temp.next;//Delete
-                    
-                    temp.next=tail.next;
-                    tail.next=temp;//Insert
-                }
-                
-                tail=head;
-                prev=head;
-                
+        ListNode prev = dummy, tail = dummy;
+        ListNode temp;
+        int i;
+        
+        while(true){
+            i = 0;
+            while(i < k && tail!=null){
+                tail = tail.next;
+                i++;
             }
-            return dummy.next;
+            
+            //we have reached end of list, we dont have the next set of k nodes to reverse
+            if(tail == null) break;
+            
+            //if list is -1->1->2->3->4->5
+            //prev = -1; tail = 3
+            head = prev.next; //head = 1
+            
+            while(prev.next != tail){
+                temp = prev.next; //assign  temp = 1
+                prev.next = temp.next; //delete         -1->2
+                temp.next = tail.next;                 //1->4
+                tail.next = temp; //insert after tail   3->1
+            }
+            
+            // list becomes -1->3->2->1->4->5
+            prev = head; // prev = 1 now head = 1 is at the end
+            tail = head; //tail = 1
+        }
+        
+        return dummy.next;
     }
 }
 
