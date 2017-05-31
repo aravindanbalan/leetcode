@@ -36,6 +36,7 @@ public class Solution {
         
         while(true){
             i = 0;
+            //move tail k nodes away
             while(i < k && tail!=null){
                 tail = tail.next;
                 i++;
