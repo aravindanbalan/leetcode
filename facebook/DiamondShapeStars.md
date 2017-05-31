@@ -1,17 +1,20 @@
+```
 https://www.careercup.com/question?id=5693819250016256
 
 Given an ODD number, print diamond pattern of stars recursively.
 
 
 n = 5, Diamond shape is as follows:
+```
   *
  ***
 *****
  ***
   *
+```
 void print(int n){ 
 }
-
+```
 ```java
 
 /**
