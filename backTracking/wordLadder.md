@@ -19,91 +19,110 @@ public class Solution {
         if(beginWord == null || endWord == null || wordList == null || wordList.size() == 0) return 0;
         //we can do BFS
         
-        // Queue<String> queue = new LinkedList<String>();
-        // Set<String> dict = new HashSet<String>(wordList);
-        // Set<String> visited = new HashSet<String>();
-        // visited.add(beginWord);
+         
+        Queue<String> queue = new LinkedList<String>();
+        Set<String> dict = new HashSet<String>(wordList);
+        Set<String> visited = new HashSet<String>();
         
-        // queue.add(beginWord);
-        
-        // int len = 1; //start word
-        // while(!queue.isEmpty()){
-        //     len++;
-
-        //     String word = queue.poll();
-            
-        //     char[] wordChar = word.toCharArray();
-        //     for(int i = 0; i< wordChar.length; i++){
-        //         //for each position in the word
-                
-        //         for(char c = 'a' ; c <= 'z' ; c++){
-        //             wordChar[i] = c;
-        //             String newWord = new String(wordChar);
-                    
-        //             if(endWord.equals(newWord)) return len + 1; //including the end word itself
-                    
-        //             if(!visited.contains(newWord) && dict.contains(newWord)){
-        //                 visited.add(newWord);
-        //                 queue.add(newWord);
-        //             }
-                
-        //         }
-        //     }
-        // }
-        
-        // return 0;
-        
-        
-        //we can do double ended BFS
-        
-        Set<String> wordDict = new HashSet<String>(wordList);
-
-        //if end word is not in dictionary then we cant find a solution
-        if(!wordDict.contains(endWord)) return 0;
-        
-        int len = 1;
-        Set<String> beginSet = new HashSet<>();
-        Set<String> endSet = new HashSet<>();
-        Set<String> visited = new HashSet<>();
-        
-        beginSet.add(beginWord);
-        endSet.add(endWord);
+        dict.add(beginWord);
         visited.add(beginWord);
-        visited.add(endWord);
+        queue.add(beginWord);
         
-        while (!beginSet.isEmpty() && !endSet.isEmpty()) {
-            // add new words to smaller set to achieve better performance
-            boolean isBeginSetSmall = beginSet.size() < endSet.size();
-            Set<String> small = isBeginSetSmall ? beginSet : endSet;
-            Set<String> big = isBeginSetSmall ? endSet : beginSet;
-            Set<String> next = new HashSet<>();
+        int len = 0;
+        while(!queue.isEmpty()){
             len++;
-            for (String str : small) {
-                // construct all possible words
-                for (int i = 0; i < str.length(); i++) {
-                    for (char ch = 'a'; ch <= 'z'; ch++) {
-                        StringBuilder sb = new StringBuilder(str);
-                        sb.setCharAt(i, ch);
-                        String word = sb.toString();
-                        
-                        //both points meet then return length
-                        if (big.contains(word)) {
-                            return len;
-                        }
-                        if (wordDict.contains(word) && !visited.contains(word)) {
-                            visited.add(word);
-                            next.add(word);
-                        }
+
+            int count = queue.size();
+            //level order traversal
+            for(int i = 0 ;i< count; i++){
+                String word = queue.poll();
+                List<String> neighbors = getNeighbors(word, dict);
+                
+                for(String neighbor : neighbors){
+                    if(endWord.equals(neighbor)) 
+                        return len+1;
+                    
+                    if(!visited.contains(neighbor)){
+                        queue.add(neighbor);
+                        visited.add(neighbor);
                     }
                 }
             }
-            if (isBeginSetSmall) {
-                beginSet = next;
-            } else {
-                endSet = next;
+        }
+        
+        return 0;
+        
+        //we can do double ended BFS
+        
+        // Set<String> wordDict = new HashSet<String>(wordList);
+
+        // //if end word is not in dictionary then we cant find a solution
+        // if(!wordDict.contains(endWord)) return 0;
+        
+        // int len = 1;
+        // Set<String> beginSet = new HashSet<>();
+        // Set<String> endSet = new HashSet<>();
+        // Set<String> visited = new HashSet<>();
+        
+        // beginSet.add(beginWord);
+        // endSet.add(endWord);
+        // visited.add(beginWord);
+        // visited.add(endWord);
+        
+        // while (!beginSet.isEmpty() && !endSet.isEmpty()) {
+        //     // add new words to smaller set to achieve better performance
+        //     boolean isBeginSetSmall = beginSet.size() < endSet.size();
+        //     Set<String> small = isBeginSetSmall ? beginSet : endSet;
+        //     Set<String> big = isBeginSetSmall ? endSet : beginSet;
+        //     Set<String> next = new HashSet<>();
+        //     len++;
+        //     for (String str : small) {
+        //         // construct all possible words
+        //         for (int i = 0; i < str.length(); i++) {
+        //             for (char ch = 'a'; ch <= 'z'; ch++) {
+        //                 StringBuilder sb = new StringBuilder(str);
+        //                 sb.setCharAt(i, ch);
+        //                 String word = sb.toString();
+                        
+        //                 //both points meet then return length
+        //                 if (big.contains(word)) {
+        //                     return len;
+        //                 }
+        //                 if (wordDict.contains(word) && !visited.contains(word)) {
+        //                     visited.add(word);
+        //                     next.add(word);
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     if (isBeginSetSmall) {
+        //         beginSet = next;
+        //     } else {
+        //         endSet = next;
+        //     }
+        // }
+        // return 0;
+    }
+    
+    private List<String> getNeighbors(String word, Set<String> dict){
+        char[] ch = word.toCharArray();
+        List<String> result = new ArrayList<String>();
+        
+        for(int i =0; i< ch.length ; i++){
+            
+            for(char c = 'a' ; c <= 'z'; c++){
+                char old = ch[i];
+                ch[i] = c;
+                
+                String newWord = new String(ch);
+                if(dict.contains(newWord)){
+                    result.add(newWord);
+                }
+                ch[i] = old;
             }
         }
-        return 0;
+        
+        return result;
     }
 }
 ```
