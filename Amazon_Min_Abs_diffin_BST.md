@@ -20,7 +20,6 @@ Note: There are at least two nodes in this BST.
 ```
 
 ```java
-
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -39,7 +38,8 @@ public class Solution {
         return min;
     }
     
-    //Inorder applies only if its  a BST
+    //Inorder applies only if its  a BST 
+    //Time - O(n) and space O(1)
     private void minDiffUtil(TreeNode root){
         if(root == null) return;
         
@@ -54,5 +54,34 @@ public class Solution {
         
         minDiffUtil(root.right);
     }
+    
+    
+    /// What if its not a BST and any BT, use TreeSet and find ceiling and floor value of current value in the set.
+    //O(logn) for that step and then do it for all nodes
+    //Time - O(n) and space = O(N) 
+    public class Solution {
+    TreeSet<Integer> set = new TreeSet<>();
+    int min = Integer.MAX_VALUE;
+    
+    public int getMinimumDifference(TreeNode root) {
+        if (root == null) return min;
+        
+        if (!set.isEmpty()) {
+            if (set.floor(root.val) != null) {
+                min = Math.min(min, root.val - set.floor(root.val));
+            }
+            if (set.ceiling(root.val) != null) {
+                min = Math.min(min, set.ceiling(root.val) - root.val);
+            }
+        }
+        
+        set.add(root.val);
+        
+        getMinimumDifference(root.left);
+        getMinimumDifference(root.right);
+        
+        return min;
+    }
+}
 }
 ```
