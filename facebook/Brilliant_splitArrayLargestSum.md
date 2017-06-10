@@ -22,6 +22,7 @@ where the largest sum among the two subarrays is only 18.
 ```
 
 ```java
+//O (n log(sum - max))
 public class Solution {
     public int splitArray(int[] nums, int m) {
         if(nums.length == 0) return 0;
